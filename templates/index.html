@@ -20,7 +20,7 @@
     </div>
     {% endif %}
     {% endwith %}
-    <form action="/" method="POST">
+    <form action="/add" method="POST">
         <input type="text" placeholder="Enter a city name" name="city_name" id="input-city">
         <button type="submit" class="submit-button">Add</button>
     </form>
@@ -63,6 +63,20 @@
         <div class="empty"></div>
         <div class="city">EDMONTON</div>
     </div>
+
+    {% if dict_with_weather_info %}
+    <div class="card evening-morning">
+        <div class="delete-wrapper">
+            <form action="#" method="POST">
+                <input type="hidden" name="id" value="">
+                <button class="delete-button" type="submit">&#10006;</button>
+            </form>
+        </div>
+        <div class="degrees"><span>{{ dict_with_weather_info['temp'] }}<span class="celsius"> °C</span></span></div>
+        <div class="state">Cold</div>
+        <div class="empty"></div>
+        <div class="city">{{ dict_with_weather_info['city_name'] }}</div>
+    {% endif %}
 </div>
 </body>
 </html>
