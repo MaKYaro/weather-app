@@ -20,8 +20,10 @@ session = Session()
 
 
 def add_city_to_db(name):
-    query = session.query(City)
-    identifier = query.count()
+    try:
+        identifier = session.query(City.id)[-1][0] + 1
+    except IndexError:
+        identifier = 1
     city = City(id=identifier, name=name)
     session.add(city)
     session.commit()
@@ -37,6 +39,8 @@ def all_cities():
     return query.all()
 
 
-#query = session.query(City)
-#query.delete()
-#session.commit()
+def delete_city(city_id):
+    query = session.query(City)
+    city = query.filter_by(id=city_id).first()
+    session.delete(city)
+    session.commit()
